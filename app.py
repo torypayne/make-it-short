@@ -44,11 +44,16 @@ def popular():
 
 @app.route("/<code>")
 def redirect_on_code(code):
-	model.db_connect()
-	model.log_visit(code)
-	url = model.url_info(code)
-	model.db.close()
-	return redirect(url.url)
+	try:
+		model.db_connect()
+		model.log_visit(code)
+		url = model.url_info(code)
+		model.db.close()
+		return redirect(url.url)
+	except:
+		model.db.close()
+		return render_template('404.html'), 404
+
 
 @app.errorhandler(404)
 def page_not_found(e):
