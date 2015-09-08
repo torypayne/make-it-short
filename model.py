@@ -2,7 +2,7 @@ import MySQLdb
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.schema import CreateTable
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, DateTime, String, ForeignKey, Text, desc, join
+from sqlalchemy import Column, Integer, DateTime, String, ForeignKey, Text, desc, join, func
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 from datetime import datetime, timedelta
 import string, random
