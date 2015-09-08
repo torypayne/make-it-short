@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <title>Make it Short</title>
-<link rel="stylesheet" href="static/css/flatly.bootstrap.min.css">
-<link rel="shortcut icon" href="static/favicon.ico">
-<link rel="stylesheet" href="static/css/main.css">
-<link rel="stylesheet" href="static/css/ladda-themeless.min.css">
+<link rel="stylesheet" href="../static/css/flatly.bootstrap.min.css">
+<link rel="shortcut icon" href="../static/favicon.ico">
+<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="../static/css/ladda-themeless.min.css">
 </head>
 <body>
 <div class="collapse navbar-collapse navbar-inverse">
@@ -26,19 +26,15 @@
 
 <br>
 <div class="container">
-<form action="/new_code">
-<div class="jumbotron">
-                <h1>Make it Short</h1>
-                <p>No one likes long urls. Make it short.</p>
-				<div class="input-group">
-                    <input type="text" class="form-control" placeholder="Put in any url you'd like to shorten" name="url" id="url">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary ladda-button" type="submit" data-style="slide-left"><span class="ladda-label">Submit</span></button>
-                    </span>
-                  </div>
-                  <br>
-              </div>
-</form>
+<form action="/report">
+<div class="well well-lg">
+  <h1>Visit Stats</h1>
+  <h3>Url: <a href="{{url.url}}">{{url.url}}</a><br>
+  Code: {{url.code}}<br>
+  Visits: {{url.visits}}<br>
+  Created: {{url.created.month}}/{{url.created.day}}/{{url.created.year}}
+  </h3>
+</div>
 </div>
 
 

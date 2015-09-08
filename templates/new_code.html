@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <title>Make it Short</title>
-<link rel="stylesheet" href="static/css/flatly.bootstrap.min.css">
-<link rel="shortcut icon" href="static/favicon.ico">
-<link rel="stylesheet" href="static/css/main.css">
-<link rel="stylesheet" href="static/css/ladda-themeless.min.css">
+<link rel="stylesheet" href="../static/css/flatly.bootstrap.min.css">
+<link rel="shortcut icon" href="../static/favicon.ico">
+<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="../static/css/ladda-themeless.min.css">
 </head>
 <body>
 <div class="collapse navbar-collapse navbar-inverse">
@@ -26,19 +26,16 @@
 
 <br>
 <div class="container">
-<form action="/new_code">
-<div class="jumbotron">
-                <h1>Make it Short</h1>
-                <p>No one likes long urls. Make it short.</p>
-				<div class="input-group">
-                    <input type="text" class="form-control" placeholder="Put in any url you'd like to shorten" name="url" id="url">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary ladda-button" type="submit" data-style="slide-left"><span class="ladda-label">Submit</span></button>
-                    </span>
-                  </div>
-                  <br>
-              </div>
-</form>
+<form action="/report">
+<div class="well well-lg">
+  <h1>It's Short Now!</h1>
+  <h3>New Link: <a href="/{{code}}">http://make-it-short.herokuapp.com/{{code}}</a><br>
+  Original Url: <a href="{{url}}">{{url}}</a></h3>
+
+  <h5>Sharing? You can see how many people visited your link whenever you want.<br>
+  Just go to <a href="/visits/{{code}}">http://make-it-short.herokuapp.com/visits/{{code}}</a></h5>
+  </h3>
+</div>
 </div>
 
 

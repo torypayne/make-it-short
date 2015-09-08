@@ -13,9 +13,9 @@ def index():
 	return render_template("index.html")
 
 @app.route("/new_code")
-def new_code(url):
+def new_code():
 	url = request.args.get("url")
-	model.db.connect()
+	model.db_connect()
 	code = model.create_code(url)
 	model.db.close()
 	return render_template("new_code.html", url=url, code=code)
@@ -32,14 +32,14 @@ def recent_urls():
 	model.db_connect()
 	recently_shortened = model.recently_shortened()
 	model.db.close()
-	return render_template("recently_shortened.html", recently_shortened=recently_shortened)
+	return render_template("recently_shortened.html", recent=recent)
 
 @app.route("/popular")
 def popular():
 	model.db_connect()
 	most_popular = model.most_popular()
 	model.db.close()
-	return render_template("most_popular.html", most_popular=most_popular)
+	return render_template("most_popular.html", popular=popular)
 
 
 @app.route("/<code>")
