@@ -32,14 +32,14 @@ def recent_urls():
 	model.db_connect()
 	recent = model.recently_shortened()
 	model.db.close()
-	return render_template("recently_shortened.html", recent=recent)
+	return render_template("recent.html", recent=recent)
 
 @app.route("/popular")
 def popular():
 	model.db_connect()
 	popular = model.most_popular()
 	model.db.close()
-	return render_template("most_popular.html", popular=popular)
+	return render_template("popular.html", popular=popular)
 
 
 @app.route("/<code>")

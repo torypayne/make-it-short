@@ -28,21 +28,19 @@
 <div class="container">
 <form action="/report">
 <div class="well well-lg">
-  <h1>Recently Shortened Urls</h1>
+  <h1>Top 10 Shared Urls in the Past Month</h1>
             <div class="component">
               <table class="table table-striped table-hover sortable">
                 <thead>
                   <tr>
                     <th>Link</th>
                     <th>Code</th>
-                    <th>Visits</th>
-                    <th>Created</th>
-                  {% for link in recent %}
+                    <th>Recent Visits</th>
+                  {% for link in popular %}
                   <tr>
-                    <td><a href="{{link.url}}">{{link.url}}</a></td>
-                    <td><a href="/{{link.code}}">{{link.code}}</a></td>
-                    <td><a href="/visits/{{link.code}}">{{link.visits}}</td>
-                    <td>{{link.created.month}}/{{link.created.day}}/{{link.created.year}}</td>
+                    <td><a href="{{link['url']}}">{{link['url']}}</a></td>
+                    <td><a href="/{{link['code']}}">{{link['code']}}</a></td>
+                    <td><a href="/visits/{{link['code']}}">{{link['visits']}}</td>
                   </tr>
                   {% endfor %}
                 </tbody>
