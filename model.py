@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import string, random
 
 
-
+#I'm opting for ease of sharing and against security.  Obviously not something that would be done in prod
 engine = create_engine('mysql://bcbb23c52f8e26:08a58f63@us-cdbr-iron-east-02.cleardb.net/heroku_775705408510550?', pool_recycle=3600)
 connection = engine.connect()
 db = scoped_session(sessionmaker(bind=engine, 
