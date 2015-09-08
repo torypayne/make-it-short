@@ -4,8 +4,10 @@ from sqlalchemy.schema import CreateTable
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, DateTime, String, ForeignKey, Text, desc
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
-from datetime import datetime
+from datetime import datetime, timedelta
 import string, random
+
+
 
 engine = create_engine('mysql://bcbb23c52f8e26:08a58f63@us-cdbr-iron-east-02.cleardb.net/heroku_775705408510550?', pool_recycle=3600)
 connection = engine.connect()
@@ -13,6 +15,18 @@ db = scoped_session(sessionmaker(bind=engine,
                                     autocommit = False, 
                                     autoflush = False))
 
+#Creating an additional db_connect function that can be called from the app to prevent db drops--
+#the free MySQL DBs available on Heroku are pretty low quality, I've found the best solution is to
+#force the connection before making any requests.  It works well for low traffic personal applications.
+#I wouldn't recommend for production.
+def db_connect():
+    engine = create_engine('mysql://bcbb23c52f8e26:08a58f63@us-cdbr-iron-east-02.cleardb.net/heroku_775705408510550?', pool_recycle=3600)
+    connection = engine.connect()
+    db = scoped_session(sessionmaker(bind=engine, 
+                                    autocommit = False, 
+                                    autoflush = False))
+
+# db_connect()
 Base = declarative_base()
 
 class Url(Base):
@@ -60,6 +74,8 @@ def recently_shortened():
 
 def most_popular():
     """Returns the most popular urls visited in the last month"""
+    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+    ten_most_popular = db.query(Visit).filter(Visit.date>thirty_days_ago).limit(10)
     pass
 
 def log_visit(code):
