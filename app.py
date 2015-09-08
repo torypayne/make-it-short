@@ -1,13 +1,11 @@
-from flask import Flask, render_template, redirect, request, url_for, flash, session
+from flask import Flask, render_template, redirect, request, url_for, flash, session, jsonify
 import requests
 import json
 import model
-import ast
 import datetime
 
 app = Flask(__name__)
 app.secret_key = 'thisisntarealsecretkeybecausethisisademo'
-
 
 
 @app.route("/")
@@ -20,7 +18,7 @@ def new_code(url):
 	model.db.connect()
 	code = model.create_code(url)
 	model.db.close()
-	return render_template("new_url.html", code=code, url=url)
+	return code
 
 @app.route("/<code>/visits")
 def url_visits(code):
