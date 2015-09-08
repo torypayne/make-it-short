@@ -37,16 +37,15 @@ def create_code(url):
     saved = False
     char = string.ascii_uppercase + string.digits + string.ascii_lowercase
     code = ''.join(random.choice(char) for x in range(length))
-    # while saved == False:
-    #     try:
-    #         #try to save the randomly generated code. Because it's a unique field,
-    #         #we'll get an error if it's a repeat code and will make a new one
+    while saved == False:
+        try: 
+            db.query(Url).filter_by(code=code).first()
+            saved = True
+        except:
+            code = ''.join(random.choice(char) for x in range(length))
     add_url = Url(url=url, code=code)
     db.add(add_url)
     db.commit()
-    # saved == True
-        # except:
-        #     code = ''.join(random.choice(char) for x in range(length))
     return code
 
 def url_info(code):
