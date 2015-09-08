@@ -20,7 +20,7 @@ def new_code(url):
 	model.db.connect()
 	code = model.create_code(url)
 	model.db.close()
-	render_template("new_url.html", code=code, url=url)
+	return render_template("new_url.html", code=code, url=url)
 
 @app.route("/<code>/visits")
 def url_visits(code):
@@ -44,10 +44,17 @@ def popular():
 	return render_template("most_popular.html", most_popular=most_popular)
 
 
+@app.route("/<code>")
+def redirect_on_code(code):
+	model.db_connect()
+	model.log_visit(code)
+	url = model.url_info(code)
+	model.db.close()
+	return redirect(url.url)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+	return render_template('404.html'), 404
 
 
 if __name__ == "__main__":

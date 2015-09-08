@@ -89,7 +89,7 @@ def most_popular():
     """Returns the most popular urls visited in the last month"""
     #TODO translate to SQLAchemy
     #I ran into a roadblock here on the SQLAchemy Translation, but the SQL is easy
-    #so we're just going to use that for now--
+    #so we're just going to use that for now
     result = engine.execute("select url, visits.code, count(*) from visits visits inner join urls urls on visits.code = urls.code where date > date_add(now(), interval -30 day) group by code order by count(*) desc limit 10;")
     top_ten = []
     for item in result:
