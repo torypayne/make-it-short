@@ -18,14 +18,14 @@ def new_code(url):
 	model.db.connect()
 	code = model.create_code(url)
 	model.db.close()
-	return code
+	return render_template("new_code.html", url=url, code=code)
 
-@app.route("/<code>/visits")
+@app.route("/visits/<code>")
 def url_visits(code):
 	model.db_connect()
-	url_info=model.url_info(code)
+	url=model.url_info(code)
 	model.db.close()
-	return render_template("visits.html", url_info=url_info)
+	return render_template("visits.html", url=url)
 
 @app.route("/recent")
 def recent_urls():
