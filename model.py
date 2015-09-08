@@ -62,5 +62,11 @@ def most_popular():
     """Returns the most popular urls visited in the last month"""
     pass
 
+def log_visit(code):
+    db.query(Url).filter_by(code=code).update({"visits": Url.visits + 1})
+    add_visit = Visit(code=code)
+    db.add(add_visit)
+    db.commit()
+    pass
 
 
